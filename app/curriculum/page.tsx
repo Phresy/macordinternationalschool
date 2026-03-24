@@ -4,7 +4,8 @@ import { useLanguage } from '@/context/LanguageContext'
 import { Globe, Award, Rocket, CheckCircle2 } from 'lucide-react'
 
 export default function CurriculumPage() {
-  const { t } = useLanguage()
+  // FIXED: Destructure language from the hook
+  const { t, language } = useLanguage()
 
   // Helper to apply the correct brand colors to the roadmap cards
   const stageColors = [
@@ -33,17 +34,20 @@ export default function CurriculumPage() {
             {[
               { 
                 icon: Globe, 
-                title: t.language === 'en' ? "Bilingual Mastery" : "Maîtrise Bilingue", 
+                // FIXED: t.language -> language
+                title: language === 'en' ? "Bilingual Mastery" : "Maîtrise Bilingue", 
                 text: t.stats.bilingual 
               },
               { 
                 icon: Award, 
-                title: t.language === 'en' ? "Dual Standards" : "Doubles Standards", 
+                // FIXED: t.language -> language
+                title: language === 'en' ? "Dual Standards" : "Doubles Standards", 
                 text: t.stats.curriculum 
               },
               { 
                 icon: Rocket, 
-                title: t.language === 'en' ? "Future Ready" : "Prêt pour l'Avenir", 
+                // FIXED: t.language -> language
+                title: language === 'en' ? "Future Ready" : "Prêt pour l'Avenir", 
                 text: t.programs.arc.desc 
               },
             ].map((item, i) => (
@@ -61,7 +65,7 @@ export default function CurriculumPage() {
       <section className="py-32 max-w-5xl mx-auto px-8">
         <div className="space-y-20">
           {/* We turn the dictionary object into an array to map through it */}
-          {Object.values(t.curriculum.stages).map((stage, idx) => (
+          {Object.values(t.curriculum.stages).map((stage: any, idx) => (
             <div key={idx} className="flex flex-col lg:flex-row gap-12 items-center group">
               <div className="lg:w-1/3 text-center lg:text-right">
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-macord-cyan mb-2 block">
@@ -72,12 +76,13 @@ export default function CurriculumPage() {
                 </h2>
               </div>
               
-              <div className className={`lg:w-2/3 p-10 md:p-14 rounded-[3.5rem] bg-slate-50 border-l-8 ${stageColors[idx]} group-hover:bg-white group-hover:shadow-2xl transition-all duration-500`}>
+              {/* FIXED: Removed double className and cleaned up backticks */}
+              <div className={`lg:w-2/3 p-10 md:p-14 rounded-[3.5rem] bg-slate-50 border-l-8 ${stageColors[idx]} group-hover:bg-white group-hover:shadow-2xl transition-all duration-500`}>
                 <p className="text-slate-500 font-light leading-relaxed mb-8 text-lg">
                   {stage.desc}
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {stage.points.map((p, i) => (
+                  {stage.points.map((p: string, i: number) => (
                     <div key={i} className="flex items-center gap-3 text-sm font-bold text-macord-dark">
                       <CheckCircle2 className="text-macord-cyan" size={16} /> {p}
                     </div>
@@ -91,12 +96,12 @@ export default function CurriculumPage() {
 
       {/* --- QUICK CTA --- */}
       <section className="pb-32 text-center">
-         <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-[10px] mb-8">
-           {t.admission.status}
-         </p>
-         <button className="bg-macord-primary text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-macord-dark transition-all shadow-xl">
-           {t.hero.cta}
-         </button>
+          <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-[10px] mb-8">
+            {t.admission.status}
+          </p>
+          <button className="bg-macord-primary text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-macord-dark transition-all shadow-xl">
+            {t.hero.cta}
+          </button>
       </section>
     </main>
   )

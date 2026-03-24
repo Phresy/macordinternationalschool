@@ -4,6 +4,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { Phone, Mail, MapPin, MessageSquare, Instagram, Facebook, Twitter, Send } from 'lucide-react'
 
 export default function ContactPage() {
+  // Destructure t and language correctly
   const { t, language } = useLanguage()
 
   // Subject options translated based on current language
@@ -18,7 +19,7 @@ export default function ContactPage() {
       {/* --- HEADER --- */}
       <section className="bg-macord-dark pt-44 pb-32 rounded-b-[4rem] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:40px_40px]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[40px_40px]"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
@@ -66,11 +67,13 @@ export default function ContactPage() {
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">
                   {t.contact.labels.subject}
                 </label>
-                <select className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm focus:ring-2 focus:ring-macord-cyan transition-all outline-none appearance-none">
-                  {subjectOptions.map((opt, i) => (
-                    <option key={i} value={opt}>{opt}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm focus:ring-2 focus:ring-macord-cyan transition-all outline-none appearance-none">
+                    {subjectOptions.map((opt, i) => (
+                      <option key={i} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -80,7 +83,7 @@ export default function ContactPage() {
                 <textarea rows={5} className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm focus:ring-2 focus:ring-macord-cyan transition-all outline-none resize-none" placeholder={language === 'en' ? "How can we help?" : "Comment pouvons-nous vous aider ?"} />
               </div>
 
-              <button className="w-full bg-macord-dark text-white p-6 rounded-[1.5rem] font-black uppercase tracking-[0.3em] text-xs hover:bg-macord-primary transition-all shadow-xl flex items-center justify-center gap-3 group active:scale-95">
+              <button className="w-full bg-macord-dark text-white p-6 rounded-3xl font-black uppercase tracking-[0.3em] text-xs hover:bg-macord-primary transition-all shadow-xl flex items-center justify-center gap-3 group active:scale-95">
                 {t.contact.labels.send} <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
             </form>
@@ -132,13 +135,13 @@ export default function ContactPage() {
             {/* LIVE MAP & SOCIAL CARD */}
             <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl overflow-hidden">
               <h3 className="text-xl font-black text-macord-dark mb-6">
-                {t.language === 'en' ? 'Visit Our Campus' : 'Visitez notre Campus'}
+                {language === 'en' ? 'Visit Our Campus' : 'Visitez notre Campus'}
               </h3>
               
               <div className="space-y-6">
                 <div className="relative group rounded-[2.5rem] overflow-hidden h-64 border border-slate-100 shadow-inner bg-slate-200">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.366228343166!2d-0.1652!3d5.67!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwNDAnMTIuMCJOIDDCsDA5JzU0LjciVw!5e0!3m2!1sen!2sgh!4v1614521000000!5m2!1sen!2sgh"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.473539126404!2d-0.1650394!3d5.673898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwNDAnMjYuMCJOIDDCsDA5JzU0LjEiVw!5e0!3m2!1sen!2sgh!4v1620000000000!5m2!1sen!2sgh"
                     width="100%"
                     height="100%"
                     style={{ border: 0, filter: 'grayscale(1) contrast(1.2) opacity(0.9)' }}

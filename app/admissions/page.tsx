@@ -4,6 +4,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { Send, Clock, MapPin, Phone } from 'lucide-react'
 
 export default function AdmissionsPage() {
+  // Destructure t and language correctly from the context
   const { t, language } = useLanguage()
 
   // Dynamic steps based on current language
@@ -22,8 +23,8 @@ export default function AdmissionsPage() {
 
       <div className="flex flex-col lg:flex-row min-h-screen">
         
-        {/* LEFT SIDE: THE VIBE (Fixed on Desktop) */}
-        <div className="lg:w-5/12 relative h-[400px] lg:h-screen lg:sticky lg:top-0">
+        {/* LEFT SIDE: THE VIBE */}
+        <div className="lg:w-5/12 relative h-100 lg:h-screen lg:sticky lg:top-0">
           <img 
             src="/m1.jpg" 
             alt="Macord Campus Life" 
@@ -31,7 +32,8 @@ export default function AdmissionsPage() {
           />
           <div className="absolute inset-0 bg-macord-dark/60 backdrop-blur-[2px] flex flex-col justify-end p-12">
             <span className="text-macord-cyan font-black tracking-[0.4em] uppercase text-[10px] mb-4">
-              {t.language === 'en' ? 'Join the 2026 Cohort' : 'Rejoignez la Promotion 2026'}
+              {/* FIXED: t.language -> language */}
+              {language === 'en' ? 'Join the 2026 Cohort' : 'Rejoignez la Promotion 2026'}
             </span>
             <h1 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter leading-none mb-6">
               {t.admission.title.split(' ').map((word, i) => (
@@ -39,7 +41,8 @@ export default function AdmissionsPage() {
               ))}
             </h1>
             <p className="text-slate-300 font-light max-w-sm leading-relaxed">
-              {t.language === 'en' 
+              {/* FIXED: t.language -> language */}
+              {language === 'en' 
                 ? 'Experience a blend of British rigor and French elegance in the heart of Madina.'
                 : 'Découvrez l\'alliance de la rigueur britannique et de l\'élégance française au cœur de Madina.'
               }
@@ -65,7 +68,7 @@ export default function AdmissionsPage() {
                   }`}>
                     {step}
                   </span>
-                  {i < 3 && <div className="w-8 h-[1px] bg-slate-200 mx-2" />}
+                  {i < 3 && <div className="w-8 h-px bg-slate-200 mx-2" />}
                 </div>
               ))}
             </div>
@@ -88,7 +91,8 @@ export default function AdmissionsPage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">
-                      {t.language === 'en' ? 'Phone Number' : 'Numéro de Téléphone'}
+                      {/* FIXED: t.language -> language */}
+                      {language === 'en' ? 'Phone Number' : 'Numéro de Téléphone'}
                     </label>
                     <input type="tel" placeholder="+233..." className="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-macord-primary transition-all outline-none" />
                   </div>
@@ -96,7 +100,8 @@ export default function AdmissionsPage() {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">
-                    {t.language === 'en' ? "Student's Current Grade" : "Niveau Actuel de l'Élève"}
+                    {/* FIXED: t.language -> language */}
+                    {language === 'en' ? "Student's Current Grade" : "Niveau Actuel de l'Élève"}
                   </label>
                   <select className="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-macord-primary transition-all appearance-none outline-none">
                     {gradeOptions.map((opt, i) => (
@@ -107,9 +112,10 @@ export default function AdmissionsPage() {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">
-                    {t.contact.labels.message} ({t.language === 'en' ? 'Optional' : 'Optionnel'})
+                    {/* FIXED: t.language -> language */}
+                    {t.contact.labels.message} ({language === 'en' ? 'Optional' : 'Optionnel'})
                   </label>
-                  <textarea rows={4} placeholder={t.language === 'en' ? "Any specific requirements?" : "Des besoins spécifiques ?"} className="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-macord-primary transition-all outline-none" />
+                  <textarea rows={4} placeholder={language === 'en' ? "Any specific requirements?" : "Des besoins spécifiques ?"} className="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-macord-primary transition-all outline-none" />
                 </div>
 
                 <button className="w-full bg-macord-dark text-white p-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-macord-primary transition-all shadow-xl flex items-center justify-center gap-3 group active:scale-95">
@@ -126,7 +132,8 @@ export default function AdmissionsPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-macord-dark text-xs uppercase tracking-widest">
-                      {t.language === 'en' ? 'Visit Us' : 'Visite'}
+                      {/* FIXED: t.language -> language */}
+                      {language === 'en' ? 'Visit Us' : 'Visite'}
                     </h4>
                     <p className="text-slate-400 text-xs mt-1">Firestone, Madina</p>
                   </div>
@@ -148,7 +155,8 @@ export default function AdmissionsPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-macord-dark text-xs uppercase tracking-widest">
-                      {t.language === 'en' ? 'Hours' : 'Heures'}
+                      {/* FIXED: t.language -> language */}
+                      {language === 'en' ? 'Hours' : 'Heures'}
                     </h4>
                     <p className="text-slate-400 text-xs mt-1">Mon - Fri: 8am - 4pm</p>
                   </div>

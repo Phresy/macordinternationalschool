@@ -2,9 +2,10 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
-import { Menu, X, Globe, LayoutGrid, BookOpen, Calendar, Phone, ArrowRight, Home } from 'lucide-react'
+import { Menu, X, Globe, LayoutGrid, BookOpen, Phone, ArrowRight, Home } from 'lucide-react'
 
 export default function Navbar() {
+  // FIXED: Ensure language is destructured here
   const { t, language, setLanguage } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -23,7 +24,7 @@ export default function Navbar() {
     }
   }, [isOpen])
 
-  // UPDATED: Now using the translation object (t) for names
+  // Navigation Links using translated names from Context
   const navLinks = [
     { name: t.nav.home, href: '/', icon: <Home size={20} /> },
     { name: t.nav.curriculum, href: '/curriculum', icon: <BookOpen size={20} /> },
@@ -32,11 +33,11 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className={`fixed w-full z-[100] transition-all duration-500 ${
+    <nav className={`fixed w-full z-100 transition-all duration-500 ${
       scrolled ? 'py-3' : 'py-6 md:py-8'
     }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className={`relative flex items-center justify-between px-4 md:px-8 py-3 md:py-4 rounded-[2rem] transition-all duration-500 ${
+        <div className={`relative flex items-center justify-between px-4 md:px-8 py-3 md:py-4 rounded-4xl transition-all duration-500 ${
           scrolled || isOpen ? 'bg-white/95 backdrop-blur-xl shadow-lg border border-slate-200/50' : 'bg-transparent'
         }`}>
           
@@ -50,7 +51,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* DESKTOP MENU - Bilingual Links */}
+          {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link 
@@ -66,7 +67,7 @@ export default function Navbar() {
           </div>
 
           {/* ACTION AREA */}
-          <div className="flex items-center gap-2 md:gap-4 relative z-[120]">
+          <div className="flex items-center gap-2 md:gap-4 relative z-120">
             <button 
               onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl font-black text-[9px] md:text-xs transition-all active:scale-95 shadow-sm ${
@@ -91,12 +92,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE BENTO MENU - Bilingual Links */}
+      {/* MOBILE BENTO MENU */}
       <div className={`fixed inset-0 bg-slate-50 z-[-1] transition-all duration-700 lg:hidden overflow-y-auto ${
         isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="min-h-full pt-32 pb-10 px-6 flex flex-col">
-          <div className="grid grid-cols-2 gap-3 md:gap-4 flex-grow">
+          <div className="grid grid-cols-2 gap-3 md:gap-4 grow">
             {navLinks.map((link, idx) => (
               <Link
                 key={link.name}
@@ -117,7 +118,7 @@ export default function Navbar() {
               </Link>
             ))}
             
-            {/* CTA CARD - Bilingual */}
+            {/* CTA CARD */}
             <Link 
               href="/admissions"
               onClick={() => setIsOpen(false)}
@@ -125,7 +126,8 @@ export default function Navbar() {
             >
               <div className="space-y-1">
                 <span className="text-macord-cyan font-black uppercase text-[9px] tracking-widest block opacity-70">
-                  {t.language === 'en' ? 'Enroll 2026' : 'Inscriptions 2026'}
+                  {/* FIXED: Using language instead of t.language */}
+                  {language === 'en' ? 'Enroll 2026' : 'Inscriptions 2026'}
                 </span>
                 <span className="text-white font-bold text-lg">
                   {t.admission.ctaShort}

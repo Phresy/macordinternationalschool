@@ -1,6 +1,7 @@
 "use client"
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useMemo } from 'react'
 
+// 1. Define the translations
 const translations = {
   en: {
     nav: { 
@@ -220,19 +221,24 @@ const translations = {
   }
 }
 
+// 2. Types
+export type LanguageType = 'en' | 'fr';
 type TranslationSchema = typeof translations.en;
 
 interface LanguageContextType {
-  language: 'en' | 'fr';
-  setLanguage: (lang: 'en' | 'fr') => void;
+  language: LanguageType;
+  setLanguage: (lang: LanguageType) => void;
   t: TranslationSchema;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
+// 3. Provider Component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<'en' | 'fr'>('en')
-  const t = translations[language]
+  const [language, setLanguage] = useState<LanguageType>('en')
+  
+  // useMemo prevents unnecessary re-renders of the whole app
+  const t = useMemo(() => translations[language], [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
@@ -241,6 +247,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
+// 4. Hook
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (context === undefined) {
