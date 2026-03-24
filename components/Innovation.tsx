@@ -4,7 +4,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { Cpu, Brain, Globe, ArrowRight } from 'lucide-react'
 
 export default function Innovation() {
-  const { t, lang } = useLanguage()
+  const { t, language } = useLanguage() // Change 'lang' to 'language'
 
   const programs = [
     {
