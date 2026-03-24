@@ -9,7 +9,8 @@ const translations = {
       curriculum: 'Curriculum', 
       saturdays: 'Saturdays', 
       admissions: 'Admissions', 
-      contact: 'Contact Us' 
+      contact: 'Contact Us',
+      programs: 'Programs' // Add this line
     },
     hero: { 
       title: 'Nurturing Bilingual Excellence', 
@@ -117,7 +118,8 @@ const translations = {
       curriculum: 'Programme', 
       saturdays: 'Samedis', 
       admissions: 'Inscriptions', 
-      contact: 'Contact' 
+      contact: 'Contact',
+      programs: 'Programmes' // Add this line
     },
     hero: { 
       title: 'Cultiver l’Excellence Bilingue', 
