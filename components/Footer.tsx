@@ -4,8 +4,7 @@ import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook, ArrowUpRight } from
 import Link from 'next/link'
 
 export default function Footer() {
-  // ADDED 'as any' here to bypass the strict type checking for the build
-  const { t, language } = useLanguage() as any
+  const { t, language } = useLanguage()
 
   return (
     <footer className="bg-macord-dark text-white pt-24 pb-12">
@@ -40,19 +39,22 @@ export default function Footer() {
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li>
                 <Link href="/" className="hover:text-white cursor-pointer transition-colors flex items-center gap-2 group">
-                  {t.nav.home} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
+                  {t.nav?.home} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
                 </Link>
               </li>
               <li>
-                {/* Points to curriculum to avoid the 'programs' error */}
                 <Link href="/curriculum" className="hover:text-white cursor-pointer transition-colors flex items-center gap-2 group">
-                  {t.nav.curriculum} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
+                  {t.nav?.curriculum} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
                 </Link>
               </li>
-             
+              <li>
+                <Link href="/admissions" className="hover:text-white cursor-pointer transition-colors flex items-center gap-2 group">
+                  {t.nav?.admissions} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
+                </Link>
+              </li>
               <li>
                 <Link href="/contact" className="hover:text-white cursor-pointer transition-colors flex items-center gap-2 group">
-                  {t.nav.contact} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
+                  {t.nav?.contact} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all" />
                 </Link>
               </li>
             </ul>
